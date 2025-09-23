@@ -1,0 +1,35 @@
+{
+	"folders": [
+		{
+			"name": "dm2008-vivien-koh-AY2526-S1.",
+			"path": "."
+		},
+		{
+			"name": "activity 1b",
+			"path": "../../../Desktop/prog for int/documentation/completed/activity 1b"
+		},
+		{
+			"name": "activity 1a ",
+			"path": "../../../Desktop/prog for int/documentation/completed/activity 1a "
+		},
+		{
+			"name": "activity 2a",
+			"path": "../../../Desktop/prog for int/documentation/completed/activity 2a"
+		},
+		{
+			"name": "activity 2b",
+			"path": "../../../Desktop/prog for int/documentation/completed/activity 2b"
+		},
+		{
+			"name": "activity 3a",
+			"path": "../../../Desktop/prog for int/documentation/completed/activity 3a"
+		},
+		{
+			"name": "activity 4a",
+			"path": "../../../Desktop/prog for int/documentation/completed/activity 4a"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "dm2008-vivien-koh-AY2526-S1."
+	}
+}
