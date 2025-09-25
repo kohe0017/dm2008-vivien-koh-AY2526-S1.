@@ -18,6 +18,12 @@ const PIPE_W = 60;
 
 let score = 0;
 
+function preload() {
+  jumpSound = loadSound("audios/jump.mp3");
+  scoreSound = loadSound("audios/score.mp3");
+  
+}
+
 /* ----------------- Setup & Draw ----------------- */
 function setup() {
   createCanvas(480, 640);
