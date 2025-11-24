@@ -1,0 +1,1 @@
+This p5.js project is a sketch showing three cookies made from a Cookie Class, where the colours of the cookies can change with mouse click and the cookies can shift left or right depending on the key pressed.
