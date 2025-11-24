@@ -34,23 +34,23 @@ function setup() {
   sizeSlider.position(15, 70);
   
   // Slider: controls opacity (alpha)
-  createP("Opacity").position(0, 150).style("margin", "8px 0 0 16px");
+  createP("Opacity").position(0, 145).style("margin", "8px 0 0 16px");
   opacitySlider = createSlider(0, 255, 200, 1);
   opacitySlider.position(15, 170);
   // small live readout for current opacity value
   
   // Dropdown: choose shape
-  createP("Shape").position(0, 100).style("margin", "8px 0 0 16px");
+  createP("Shape").position(0, 90).style("margin", "8px 0 0 16px");
   shapeSelect = createSelect();
-  shapeSelect.position(16, 130);
+  shapeSelect.position(16, 125);
   shapeSelect.option("ellipse");
   shapeSelect.option("rect");
   shapeSelect.option("triangle");
 
   // Dropdown: choose rotation
-  createP("Rotation").position(0, 190).style("margin", "8px 0 0 16px");
+  createP("Rotation").position(0, 185).style("margin", "8px 0 0 16px");
   rotationSelect = createSelect();
-  rotationSelect.position(16, 220);
+  rotationSelect.position(15, 215);
   rotationSelect.option("0");
   rotationSelect.option("90");
   rotationSelect.option("180");
