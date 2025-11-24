@@ -1,0 +1,33 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  /* Use Comic Sans if available; fall back to cursive */
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+canvas {
+  display: block;
+}
+
+/* Global button styles for p5-created buttons and any page buttons */
+button {
+  background: #3cff00; 
+  color: #000000;      
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: inherit; /* use page font (Comic Sans) */
+  cursor: pointer;
+  transition: filter 0.12s ease, transform 0.06s ease;
+}
+button:hover {
+  filter: brightness(0.95);
+}
+button:active {
+  transform: translateY(1px);
+}
+
+/* Ensure selects and inputs inherit the page font */
+select, input, label {
+  font-family: inherit;
+}
