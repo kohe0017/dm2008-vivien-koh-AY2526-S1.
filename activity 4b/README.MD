@@ -1,0 +1,1 @@
+This p5.js project is a sketch of multiple coloured circles of random sizes, bouncing around the canvas. The circles can change colour and have outlines or disappear entirely depending on the key pressed.
