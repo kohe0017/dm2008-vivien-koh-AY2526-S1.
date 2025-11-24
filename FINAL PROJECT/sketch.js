@@ -29,6 +29,7 @@ let showStartGame = false;
 let startGameBackground;
 let startBackground;
 let useKeepReleaseBackgrounds = false;
+let splashSound;
 
 function preload() {
   // Initial catch images
@@ -64,6 +65,10 @@ keep3 = loadImage('keep3.png');
   
   // Start page background
   startBackground = loadImage('start.png'); // Add your start background image to the folder
+
+  splashSound = loadSound('water_splash.mp3');
+
+  bgMusic = loadSound('bg music.mp3');
 }
 
 // Create an array with the tab images
@@ -164,30 +169,33 @@ class Fish {
   fished() {
     if (
       gameState === 'playing' &&
-      !this.isCaught && // Only check for fishing if not already caught
+      !this.isCaught &&
       mouseX > this.x &&
       mouseX < this.x + 110 &&
       mouseY + 125 > this.y &&
       mouseY + 125 < this.y + 46
     ) {
-      // if the bottom of the fishing line and the fish overlap
       if (mouseIsPressed === true) {
-    this.isCaught = true;  // Set fish as caught
-    caughtFishImage = catchPalette[imageIndex]; // Always use catchPalette for caughtFishImage
-    picked = caughtFishImage; // picked is used for display only
-    caughtFishType = this.fishType; // Store the type of fish that was caught
-    // Move to next image for next catch
-    imageIndex = (imageIndex + 1) % catchPalette.length;
-    // Don't clear the background anymore
-    gameState = 'choosing';
-    keepButton.show();
-    releaseButton.show();
+        this.isCaught = true;
+        playSplash(); // use helper that lowers bg music, plays splash, then restores
+        caughtFishImage = catchPalette[imageIndex];
+        picked = caughtFishImage;
+        caughtFishType = this.fishType;
+        imageIndex = (imageIndex + 1) % catchPalette.length;
+        gameState = 'choosing';
+        keepButton.show();
+        releaseButton.show();
       }
     }
   }
 }
 
+
 function draw() {
+  if (bgMusic && !bgMusic.isPlaying() && !showStartScreen && !showEndScreen) {
+    bgMusic.setVolume(0.3);
+    bgMusic.loop();
+  }
   // Stagger fish spawning
   if (gameState === 'playing' && fishes.length < maxFishes) {
     if (millis() - lastFishSpawnTime > fishSpawnInterval) {
@@ -314,12 +322,17 @@ function releaseFish() {
   let releaseIndex = playerChoices.filter(c => c === 'release').length - 1;
   backgroundImage = releasePalette[releaseIndex] || releasePalette[releasePalette.length - 1];
   useStartGameBackground = false;
-useKeepReleaseBackgrounds = true;
+  useKeepReleaseBackgrounds = true;
   result = 'You released the fish!';
   resultTimer = millis();
   keepButton.hide();
   releaseButton.hide();
   actionCount++;
+
+  // if any caught fish exists, play the splash once and reset them
+  const anyCaught = fishes.some(f => f.isCaught);
+  if (anyCaught) playSplash();
+
   fishes.forEach(fish => {
     if (fish.isCaught) {
       fish.isCaught = false;
@@ -327,6 +340,7 @@ useKeepReleaseBackgrounds = true;
       fish.y = random(500, 700);
     }
   });
+
   if (actionCount >= 3) {
     showEndScreen = true;
   } else {
@@ -336,6 +350,28 @@ useKeepReleaseBackgrounds = true;
     }, 2000);
   }
 }
+
+// function playSplash() {
+//   if (!splashSound) return;
+//   const restoreVolume = 0.05; // target base volume
+//   const loweredVolume = 0.02; // lower while splash plays
+//   if (bgMusic && bgMusic.isPlaying && bgMusic.isPlaying()) {
+//     bgMusic.setVolume(loweredVolume);
+//   }
+//   splashSound.play();
+//   // try to restore after splash duration (duration() returns seconds)
+//   let durMs = 800;
+//   if (splashSound && typeof splashSound.duration === 'function') {
+//     const d = splashSound.duration();
+//     if (d > 0) durMs = Math.round(d * 1000) + 100;
+//   }
+//   setTimeout(() => {
+//     if (bgMusic && bgMusic.isPlaying && bgMusic.isPlaying()) {
+//       bgMusic.setVolume(restoreVolume);
+//     }
+//   }, durMs);
+// }
+
 
 function restartGame() {
   playerChoices = [];
